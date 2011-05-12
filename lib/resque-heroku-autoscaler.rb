@@ -13,5 +13,21 @@ module Resque::Plugins::HerokuAutoscaler
         end
       end
     end
+    
+    initializer 'heroku.autoscaler.configure_worker_count' do
+      Resque::Plugins::HerokuAutoscaler.config do |c|
+        c.new_worker_count do |pending|
+          if pending.zero?
+            0
+          elsif pending < 3
+            1
+          elsif pending > 50
+            50
+          else
+            (pending/2).ceil.to_i
+          end
+        end
+      end
+    end
   end
 end
