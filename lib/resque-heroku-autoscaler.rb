@@ -1,6 +1,9 @@
 module Resque::Plugins::HerokuAutoscaler
   class RailsAutoscaler < Rails::Railtie
     initializer 'heroku.autoscaler.configure_api_key' do
+      require 'heroku'
+      require 'resque/plugins/resque_heroku_autoscaler'
+      
       Resque::Plugins::HerokuAutoscaler.config do |c|
         c.heroku_user         = ''
         begin
