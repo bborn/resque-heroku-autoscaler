@@ -1,5 +1,5 @@
 module Resque::Plugins::HerokuAutoscaler
-  class RailsAutoscaler < Rails::Railtie
+  class RailsAutoscaler < Rails::Railtie    
     initializer 'heroku.autoscaler.configure_api_key' do
       require 'heroku'
       require 'resque/plugins/resque_heroku_autoscaler'
@@ -31,6 +31,13 @@ module Resque::Plugins::HerokuAutoscaler
           end
         end
       end
+    end
+    
+    initializer 'heroku.autoscaler.make_cacheable' do
+      require 'resque/plugins/heroku_autoscaler/cacheable'
+      # Now we'll only change the Heroku worker scale every 60 seconds or so, 
+      # saves a lot of problems when you're running thousands of jobs at a time
+      Resque::Plugins::HerokuAutoscaler.cachify!
     end
   end
 end
