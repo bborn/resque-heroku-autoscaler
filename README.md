@@ -9,13 +9,15 @@ This gem scales your Heroku workers according to the number of pending Resque jo
 
 In order for the scaling to work RHA needs to know your **Heroku app's name and API key**.  Set the environment variable like so:
 
-HEROKU_API_KEY -> "app name"@"api key"
+    HEROKU_API_KEY -> "app name"@"api key"
 
-Example: jungle-trees-82@baiynwzpayfnoqzqj9rijfzv1xitugxu
+Example:
+
+    jungle-trees-82@baiynwzpayfnoqzqj9rijfzv1xitugxu
 
 To figure out what your API key is, just enter the following into your local terminal: 
 
-cat ~/.heroku/credentials
+    cat ~/.heroku/credentials
 
 To use RHA in one of your jobs, just extend your job class with Resque::Plugins::HerokuAutoscaler.
 

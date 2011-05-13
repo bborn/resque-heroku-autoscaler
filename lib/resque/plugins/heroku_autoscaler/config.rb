@@ -30,7 +30,7 @@ module Resque
         
         attr_writer :heroku_max_workers
         def heroku_max_workers
-          (@max_workers || ENV['HEROKU_MAX_WORKERS']) > 50 ? 50 : ( @max_workers || ENV['HEROKU_MAX_WORKERS'])
+          (@max_workers || ENV['HEROKU_MAX_WORKERS']).to_i > 50 ? 50 : ( @max_workers || ENV['HEROKU_MAX_WORKERS']).to_i
         end
 
         def new_worker_count(pending=nil, *payload, &calculate_count)
