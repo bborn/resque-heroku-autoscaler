@@ -27,6 +27,11 @@ module Resque
         def heroku_app
           @heroku_app || ENV['HEROKU_APP']
         end
+        
+        attr_writer :heroku_max_workers
+        def heroku_max_workers
+          (@max_workers || ENV['HEROKU_MAX_WORKERS']) > 50 ? 50 : ( @max_workers || ENV['HEROKU_MAX_WORKERS'])
+        end
 
         def new_worker_count(pending=nil, *payload, &calculate_count)
           if calculate_count
