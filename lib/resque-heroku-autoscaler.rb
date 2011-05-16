@@ -24,8 +24,8 @@ module Resque::Plugins::HerokuAutoscaler
             0
           elsif pending < 3
             1
-          elsif pending > Resque::Plugins::HerokuAutoscaler.config.heroku_max_workers
-            Resque::Plugins::HerokuAutoscaler.config.heroku_max_workers
+          elsif pending > c.heroku_max_workers
+            c.heroku_max_workers
           else
             (pending/2).ceil.to_i
           end
