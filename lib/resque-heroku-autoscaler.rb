@@ -7,12 +7,12 @@ module Resque::Plugins::HerokuAutoscaler
       Resque::Plugins::HerokuAutoscaler.config do |c|
         c.heroku_user         = ''
         begin
-          c.heroku_pass       = ENV['HEROKU_API_KEY'].to_s.split('@').last
-          c.heroku_app        = ENV['HEROKU_API_KEY'].to_s.split('@').first
+          c.heroku_pass       = ENV['HEROKU_API_KEY'].to_s.split('@').last  or raise
+          c.heroku_app        = ENV['HEROKU_API_KEY'].to_s.split('@').first or raise
           c.scaling_disabled  = false
         rescue
           c.scaling_disabled  = true
-          raise "[ERROR] Please set HEROKU_API_KEY ('app-name@api-key') to enable worker auto-scaling"
+          puts "[ERROR] Please set HEROKU_API_KEY ('app-name@api-key') to enable worker auto-scaling" if Rails.env.production?
         end
       end
     end
