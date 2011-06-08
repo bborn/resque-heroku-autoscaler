@@ -27,6 +27,11 @@ module Resque
         def heroku_app
           @heroku_app || ENV['HEROKU_APP']
         end
+        
+        attr_writer :heroku_max_workers
+        def heroku_max_workers
+          (@max_workers || ENV['HEROKU_MAX_WORKERS']).to_i > 50 ? 50 : ( @max_workers || ENV['HEROKU_MAX_WORKERS']).to_i
+        end
 
         attr_writer :wait_time
         def wait_time
