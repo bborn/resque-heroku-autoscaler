@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.authors                  = ["Alexander Murmann"]
   s.email                    = "ajmurmann@gmail.com"
 
-  s.files                    = %w( README.md MIT.LICENSE GEMFILE )
+  s.files                    = %w( README.md MIT.LICENSE Gemfile )
   s.files                    += Dir.glob("lib/**/*")
   s.files                    += Dir.glob("spec/**/*")
 
